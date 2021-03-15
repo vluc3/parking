@@ -1,25 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('api')
 export class AppController {
-
-  private isXml: boolean = true;
 
   constructor(
     private readonly appService: AppService) {
   }
 
-  @Get()
-  async get(): Promise<any> {
-    let result: Promise<any> = null;
+  @Get('xml')
+  async getXml(): Promise<any> {
+    return await this.appService.getXml();
+  }
 
-    if (this.isXml) {
-      result = await this.appService.getXml();
-    } else {
-      result = this.appService.getJson();
-    }
-
-    return result;
+  @Get('json')
+  async getJson(): Promise<any> {
+    return this.appService.getJson();
   }
 }

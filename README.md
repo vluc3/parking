@@ -21,25 +21,28 @@
 
 ## Description
 
-Parking app wrote with NestJS framework
+Parking api wrote with NestJS 7.5.1 framework
 
 Time spent: 2 hours
-URL : http://locahost:3000
+2 End points:
 
-AppController.isXml: boolean = true
+http://localhost:3000/api/xml
 
 - Read URL http://data.lacub.fr/wfs?key=9Y2RU3FTE8&SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=ST_PARK_P&SRSNAME=EPSG:4326
-- Display XML content file on browser (JSONView used for rendering)
-- Content is not a list, but the entire file, cause to be a generic app, node names must not be hardcoded
+- Display XML content file as JSON object on browser
+  - JSONView extension used for rendering
+- Display body as JSON with Postman
+- Content is not a list, but the entire file, cause to be a generic api, node names must not be hardcoded
 
-or
+http://localhost:3000/api/json
 
-AppController.isXml: boolean = false (just for demo)
-
-- Read parking.json asset file
-  File provided on https://opendata.bordeaux-metropole.fr/explore/dataset/st_park_p/export/ URL
-- Display JSON content file on browser (JSONView used for rendering)
-- Content is not a list, but the entire file, cause to be a generic app, keys must not be hardcoded
+- Just for another demo
+- Read asset/parking.json file
+  File provided by URL https://opendata.bordeaux-metropole.fr/explore/dataset/st_park_p/export
+- Display JSON content file on browser
+  - JSONView extension used for rendering
+- Display body as JSON with Postman
+- Content is not a list, but the entire file, cause to be a generic api, keys must not be hardcoded
 
 ## Installation
 

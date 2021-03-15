@@ -8,12 +8,12 @@ var parseString = require('xml2js').parseString;
 @Injectable()
 export class AppService {
 
-  private url: string = 'http://data.lacub.fr/wfs?key=9Y2RU3FTE8&SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=ST_PARK_P&SRSNAME=EPSG:4326';
-  private path: string = 'asset/parking.json';
+  private xmlUrl: string = 'http://data.lacub.fr/wfs?key=9Y2RU3FTE8&SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=ST_PARK_P&SRSNAME=EPSG:4326';
+  private jsonPath: string = 'asset/parking.json';
 
   async getXml(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.readUrl(this.url, function(error: any, result: any) {
+      this.readUrl(this.xmlUrl, function(error: any, result: any) {
         if (error) {
           return reject(error);
         } else {
@@ -25,7 +25,7 @@ export class AppService {
 
   async getJson(): Promise<any> {
     try {
-      return fs.readFileSync(this.path, {encoding: 'utf8'});
+      return fs.readFileSync(this.jsonPath, {encoding: 'utf8'});
     } catch (error) {
       console.error(error);
       return null;
@@ -34,10 +34,10 @@ export class AppService {
 
   private async readUrl(url: string, callback: any) {
     http.get(url, (response: any) => {
-      var xml = '';
+      var data = '';
 
       response.on('data', (chunk: string) => {
-        xml += chunk;
+        data += chunk;
       });
 
       response.on('error', (error: any) => {
@@ -49,8 +49,12 @@ export class AppService {
       });
 
       response.on('end', () => {
-        parseString(xml, (error: any, result: any) => {
-          callback(null, result);
+        parseString(data, (error: any, result: any) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, result);
+          }
         });
       });
     });
