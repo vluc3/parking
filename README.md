@@ -24,11 +24,13 @@
 Parking app wrote with NestJS framework
 
 Time spent: 2 hours
+URL : http://locahost:3000
 
 AppController.isXml: boolean = true
 
 - Read URL http://data.lacub.fr/wfs?key=9Y2RU3FTE8&SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=ST_PARK_P&SRSNAME=EPSG:4326
 - Display XML content file on browser (JSONView used for rendering)
+- Content is not a list, but the entire file, cause to be a generic app, node names must not be hardcoded
 
 or
 
@@ -37,6 +39,7 @@ AppController.isXml: boolean = false (just for demo)
 - Read parking.json asset file
   File provided on https://opendata.bordeaux-metropole.fr/explore/dataset/st_park_p/export/ URL
 - Display JSON content file on browser (JSONView used for rendering)
+- Content is not a list, but the entire file, cause to be a generic app, keys must not be hardcoded
 
 ## Installation
 
